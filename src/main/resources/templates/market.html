@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>商城</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		li{ list-style: none; }
+	</style>
+	<script type="text/javascript">
+		window.onload = function (){
+			var oUl = document.getElementById('list');
+			var aLi = oUl.getElementsByTagName('li');
+			var count = 0;
+			
+
+			for(var i=0; i<aLi.length; i++){
+				fn(aLi[i]);
+			}
+
+
+			function fn(oLi){
+				
+				var oStrong = oLi.getElementsByTagName('strong')[0];
+				
+				var price = parseFloat(oStrong.innerHTML);
+				
+				
+
+
+				var oSpan = oLi.getElementsByTagName('span')[0];
+				var num = oSpan.innerHTML;
+				var oEm = oLi.getElementsByTagName('em')[0];
+				
+				var aInput = oLi.getElementsByTagName('input');
+				var oSub = aInput[0];
+				var oAdd = aInput[1];
+
+				var oP = document.getElementsByTagName('p')[0];
+
+				
+
+				oAdd.onclick = function (){
+					num++;
+					oSpan.innerHTML = num;
+					oEm.innerHTML = num*price + '元';
+					count = count + price;
+					oP.innerHTML = '共计：' + count;
+				}
+
+				oSub.onclick = function (){
+					if(num>0){
+						num--;
+						oSpan.innerHTML = num;
+						oEm.innerHTML = num*price + '元';
+						count = count - price;
+						oP.innerHTML = '共计：' + count;
+					}
+				}
+
+
+			}
+		}
+	</script>
+</head>
+<body>
+
+	<ul id="list">
+		<li>
+			<input type="button" value="-" />
+			<span>0</span>
+			<input type="button" value="+" />
+			单价:<strong>10元</strong>
+			小计:<em>0</em>
+		</li>
+		<li>
+			<input type="button" value="-" />
+			<span>0</span>
+			<input type="button" value="+" />
+			单价:<strong>15元</strong>
+			小计:<em>0</em>
+		</li>
+		<li>
+			<input type="button" value="-" />
+			<span>0</span>
+			<input type="button" value="+" />
+			单价:<strong>10.5元</strong>
+			小计:<em>0</em>
+		</li>
+		<li>
+			<input type="button" value="-" />
+			<span>0</span>
+			<input type="button" value="+" />
+			单价:<strong>20.5元</strong>
+			小计:<em>0</em>
+		</li>
+	</ul>
+
+	<p>共计：</p>
+
+</body>
+</html>
