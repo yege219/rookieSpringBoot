@@ -19,18 +19,26 @@ public class DbConfig {
 
     @Bean(name = "testDataSource")
     @Qualifier("testDataSource")
-    @ConfigurationProperties(prefix="spring.datasource.test")
+    @ConfigurationProperties(prefix = "spring.datasource.test")
     public DataSource testDataSource() {
+        return DataSourceBuilder.create().build();
+    }
+
+    @Bean(name = "vpsDataSource")
+    @Qualifier("vpsDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.vps")
+    public DataSource vpsDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean(name = "docker23DataSource")
     @Qualifier("docker23DataSource")
     @Primary
-    @ConfigurationProperties(prefix="spring.datasource.docker23")
+    @ConfigurationProperties(prefix = "spring.datasource.docker23")
     public DataSource docker23DataSource() {
         return DataSourceBuilder.create().build();
     }
+
 
     @Bean(name = "testJdbcTemplate")
     public JdbcTemplate testJdbcTemplate(
@@ -41,6 +49,12 @@ public class DbConfig {
     @Bean(name = "docker23JdbcTemplate")
     public JdbcTemplate docker23JdbcTemplate(
             @Qualifier("docker23DataSource") DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
+    @Bean(name = "vpsJdbcTemplate")
+    public JdbcTemplate vpsJdbcTemplate(
+            @Qualifier("vpsDataSource") DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 
