@@ -15,20 +15,27 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class MailService {
 
+    /**
+     * 该对象集成了配置文件中邮件发送的配置信息
+     */
     @Autowired
     private JavaMailSender mailSender;
 
     @Value("${mail.fromMail.addr}")
     private String from;
 
-    public void sendMail() {
+    /**
+     * 发送邮件
+     * @param to 发送给哪个邮箱
+     */
+    public void sendMail(String to) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
-        // message.setTo("zhangyechen@yxqiche.com");
-        message.setTo("zhangyechen219@163.com");
+        message.setTo(to);
+        //message.setTo("zhangyechen219@163.com");
         message.setSubject("邮件主题是");
         message.setText("邮件正文是");
         mailSender.send(message);
-        log.info("邮件已发送");
+        log.info("邮件已发送给:" + to);
     }
 }

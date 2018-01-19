@@ -17,6 +17,6 @@ public class MailController {
 
     @RequestMapping("/send")
     public void sendMailTo() {
-        mailService.sendMail();
+        mailService.sendMail("zhangyechen@yxqiche.com");
     }
 }
