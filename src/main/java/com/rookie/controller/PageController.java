@@ -12,6 +12,6 @@ public class PageController {
 
     @RequestMapping("/index")
     public String index() {
-        return "market";
+        return "index";
     }
 }
